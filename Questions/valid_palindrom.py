@@ -1,18 +1,27 @@
+import re
+
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        char = s.translate(str.maketrans("","",".,:"))
-        nospace = "".join(char.split())
-        # print(nospace)
-        small = nospace.lower()
-        # print(small)
-
-        reversetext = small[::-1]
-        if (small == reversetext):
-            return True
-        else:
-            return False
+        # Convert all characters to lowercase
+        s = s.lower()
         
-sol = Solution()
-print(sol.isPalindrome("A man, a plan, a canal: Panama"))
-print(sol.isPalindrome("race a car"))
-print(sol.isPalindrome(" "))
+        # Remove all non-alphanumeric characters
+        s = re.sub(r'[^a-z0-9]', '', s)
+        
+        # Check if the string reads the same forward and backward
+        return s == s[::-1]
+
+# Example usage:
+solution = Solution()
+
+# Example 1
+s1 = "A man, a plan, a canal: Panama"
+print(solution.isPalindrome(s1))  # Output: True
+
+# Example 2
+s2 = "race a car"
+print(solution.isPalindrome(s2))  # Output: False
+
+# Example 3
+s3 = " "
+print(solution.isPalindrome(s3))  # Output: True
